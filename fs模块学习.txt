@@ -1,0 +1,85 @@
+在nodejs中，可以通过fs（file system）模块进行文件的I/O操作。
+ 
+API链接地址：
+ 
+http://nodeapi.ucdok.com/#/api/fs.html
+ 
+下面进行fs文件系统的使用实例：
+ 
+1、模块调用声明：
+ 
+var fs= require('fs');
+ 
+  var path = require('path');
+ 
+fs为文件模块，path为系统路径模块。
+ 
+2、可以使用writeFile方法，将数据写入文件到某个文件夹下。
+ 
+fs.writeFile(filename, data, [options], callback)
+ 
+filename为具体的文件保存路径地址,
+ 
+data为具体要写入文件的数据对象,
+ 
+[options]为具体的保存文件配置，编码格式等,
+ 
+callback为具体的回调函数，进行相应的错误捕捉及提示。
+ 
+代码如下：
+ 
+fs.writeFile(path.join(__dirname, 'account.js'), JSON.stringify(tempAccount), function (err) {
+        if (err) throw err;
+        console.log("Export Account Success!");
+    });
+以JSON格式将数据写入到文件路径下。
+ 
+3、使用readFile方法，进行文件数据的读取。
+ 
+fs.readFile(filename, [options], callback)
+ 
+filename为文件路径及名称，
+ 
+[options]为具体选项配置，包括数据的编码方式，
+ 
+callback为回调函数，进行相应的错误处理及提示。
+ 
+代码如下：
+ 
+fs.readFile(path.join(__dirname, 'account.js'), function (err,bytesRead) {
+    if (err) throw err;
+    console.log(bytesRead);
+});
+ 
+ 
+ 
+读出数据二进制的流文件，如果需要为具体的数据，需要进行编码的配置，代码如下：
+ 
+复制代码
+fs.readFile(path.join(__dirname, 'account.js'),{encoding:'utf-8'}, function (err,bytesRead) {
+    if (err) throw err;
+    var data=JSON.parse(bytesRead);
+    console.log(data[0]);
+    console.log("readFile success");
+});
+ 
+ 
+ 
+ 
+4、读取文件夹下的相关ingwenj名称。
+ 
+readdir(path,callback)
+ 
+path为具体读取的文件夹路径地址，
+ 
+callback为回调函数。
+ 
+readdirSync(path)为读取文件的实时同步版本方法。
+ 
+path为具体的文件夹路径地址。
+ 
+ 
+ 
+var  data=fs.readdirSync(__dirname);
+console.log(data);
+ 

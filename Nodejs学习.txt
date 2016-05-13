@@ -1,0 +1,108 @@
+Nodejs学习
+
+一、安装Nodejs
+1.中文官网http://nodejs.cn/
+2.安装文件https://nodejs.org/dist/v5.6.0/node-v5.6.0-x64.msi
+3.安装到D:\Nodejs
+4.配置环境变量
+5.在CMD中测试node -v
+
+二、安装Sublime Text 2
+1.百度搜索sublime
+2.软件中心下载http://dlsw.baidu.com/sw-search-sp/soft/f5/15554/Sublime_Text_2.0.2_Setup.exe
+3.安装到D:\Sublime Text 2，运行
+4.点Help->In license输入注册码
+----- BEGIN LICENSE -----
+Andrew Weber
+Single User License
+EA7E-855605
+813A03DD 5E4AD9E6 6C0EEB94 BC99798F
+942194A6 02396E98 E62C9979 4BB979FE
+91424C9D A45400BF F6747D88 2FB88078
+90F5CC94 1CDC92DC 8457107A F151657B
+1D22E383 A997F016 42397640 33F41CFC
+E1D0AE85 A0BBD039 0E9C8D55 E1B89D5D
+5CDB7036 E56DE1C0 EFCC0840 650CD3A6
+B98FC99C 8FAC73EE D2B95564 DF450523
+------ END LICENSE ------
+
+三、安装Package Control插件
+1.按下ctrl+~，输入
+import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')
+import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
+2.等待提示重启
+3.重启
+4.使用Package Control安装其他插件，如JsFormart、SFTP等等
+
+四、安装Nodejs插件
+1.下载Nodejs插件，https://codeload.github.com/tanepiper/SublimeText-Nodejs/zip/master
+2.解压重命名为Nodejs放到->点击Preferences->Browse Packages打开的文件夹内
+3.编辑Nodejs文件夹下的Nodejs.sublime-build内容
+{
+  "cmd": ["node", "$file"],
+  "file_regex": "^[ ]*File \"(...*?)\", line ([0-9]*)",
+  "working_dir": "${project_path:${folder}}",
+  "selector": "source.js",
+  "shell": true,
+  "encoding": "utf-8",
+  "windows": {
+    "cmd": ["start","cmd","/k","node", "$file"]
+  }
+}
+4.重启
+
+五、安装Express和应用生成器
+1.用管理员权限打开CMD，进入D:\Nodejs
+3.npm install express -g
+4.npm install express-generator -g
+5.测试express -h
+
+六、构建Express项目
+1.用管理员权限打开CMD
+2.新建项目express myapp -e
+3.进入cd myapp
+4.安装依赖包npm install
+
+七、开发运行
+1.使用Sublime Text打开文件夹myapp
+2.点击Tools->Build System->Nodejs选择编译系统
+3.打开bin/www，按ctrl+B即运行
+4.浏览器访问http://127.0.0.1:3000/
+CMD运行，下面几种都可以:
+node bin/www
+node start
+
+*************************************************
+
+## CMD设置
+1.屏幕缓冲区300x300
+2.文字色131,148,150
+3.背景色4,32,41
+
+## npm下载慢，使用淘宝的cnpm源
+1.编辑~/.npmrc加入下面内容
+registry = https://registry.npm.taobao.org
+
+## 使用forever后台运行
+npm install forever -g
+forver start ./bin/www
+
+## 使用nodemon自动加载代码，无需重启
+1.全局安装npm install -g nodemon
+2.在项目下执行nodemon相当于node ./bin/www
+
+## 使用node-inspector调试
+npm install -g node-inspector
+node-debug ./bin/www
+
+## 使用Enide开发，它是Eclipse的Nodejs专用版
+http://101.44.1.117/files/2056000003DB4DAC/nchc.dl.sourceforge.net/project/nodeclipse/Enide-2015/7/Enide-2015-7-windows-x64-20150706.zip
+
+## Nodejs代码提示插件Spket
+在线安装http://www.agpad.com/update/
+下载安装http://www.agpad.com/downloads/spket-update-1.6.23.zip
+破解下载，百度搜spket license，CSDN有下，放到Eclipse的pulgin下面
+Spket配置，Preferences->Spket->JavaScript Profiles->New->Add Library
+
+## html编辑插件，用来编辑ejs文件
+http://101.44.1.126/files/12510000029C768F/osdn.dl.sourceforge.jp/amateras/57710/tk.eclipse.plugin.htmleditor_2.2.0.jar
